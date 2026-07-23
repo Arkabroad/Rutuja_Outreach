@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutuja Lokhande , Cold Outreach Playbook</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #090B0F;
+  --bg2: #0F1218;
+  --bg3: #151820;
+  --surface: #1A1D26;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.04);
+  --violet: #7C6FE8;
+  --violet-soft: rgba(124,111,232,0.12);
+  --violet-mid: rgba(124,111,232,0.25);
+  --cream: #EDE9E3;
+  --cream2: rgba(237,233,227,0.65);
+  --cream3: rgba(237,233,227,0.35);
+  --cream4: rgba(237,233,227,0.1);
+  --teal: #3DB89A;
+  --teal-soft: rgba(61,184,154,0.1);
+  --amber: #D4973F;
+  --red: #E05252;
+  --green: #4ADE80;
+  --green-soft: rgba(74,222,128,0.08);
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Syne', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+html, body { height: 100%; overflow: hidden; }
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+}
+
+/* TOPBAR */
+.topbar {
+  flex-shrink: 0;
+  height: 52px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+.topbar-brand { font-family: var(--serif); font-size: 18px; color: var(--cream); }
+.topbar-brand span { color: var(--violet); }
+.topbar-client { text-align: center; }
+.topbar-client-name { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--cream); letter-spacing: 0.3px; }
+.topbar-client-role { font-family: var(--mono); font-size: 9.5px; color: var(--cream3); margin-top: 1px; }
+.topbar-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 9px; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; }
+.pulse-dot { width: 7px; height: 7px; background: var(--teal); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+
+/* TABS */
+.tabs {
+  flex-shrink: 0;
+  height: 44px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  padding: 0 20px;
+  gap: 4px;
+}
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cream3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.tab:hover { color: var(--cream2); }
+.tab.active { color: var(--violet); border-bottom-color: var(--violet); }
+.tab-badge {
+  background: var(--cream4);
+  color: var(--cream3);
+  font-size: 8px;
+  padding: 1.5px 5px;
+  border-radius: 10px;
+  font-family: var(--mono);
+}
+.tab.active .tab-badge { background: var(--violet-soft); color: var(--violet); }
+
+/* MAIN AREA */
+.main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+/* PANELS */
+.panel {
+  display: none;
+  flex: 1;
+  overflow: hidden;
+}
+.panel.active { display: flex; }
+
+/* ===== COMPANIES PANEL ===== */
+#panel-companies { flex-direction: row; }
+
+.co-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+.sidebar-section-label {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cream3);
+  padding: 14px 14px 6px;
+}
+.sidebar-featured {
+  margin: 6px 10px 8px;
+  background: var(--violet-soft);
+  border-left: 3px solid var(--violet);
+  border-radius: 4px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sidebar-featured:hover { background: rgba(124,111,232,0.18); }
+.sidebar-featured.active { background: rgba(124,111,232,0.22); }
+.sidebar-featured-eyebrow { font-family: var(--mono); font-size: 7.5px; color: var(--violet); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+.sidebar-featured-name { font-size: 12px; font-weight: 700; color: var(--cream); }
+.sidebar-featured-sub { font-size: 9.5px; color: var(--cream3); margin-top: 2px; }
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.12s;
+}
+.sidebar-item:hover { background: rgba(255,255,255,0.025); }
+.sidebar-item.active.t1 { border-left-color: var(--violet); background: rgba(124,111,232,0.06); }
+.sidebar-item.active.t2 { border-left-color: var(--teal); background: rgba(61,184,154,0.05); }
+.sidebar-idx { font-family: var(--mono); font-size: 9px; color: var(--cream3); width: 18px; flex-shrink: 0; }
+.sidebar-item.active.t1 .sidebar-idx { color: var(--violet); }
+.sidebar-item.active.t2 .sidebar-idx { color: var(--teal); }
+.sidebar-name { font-size: 10.5px; font-weight: 500; color: var(--cream2); line-height: 1.3; }
+.sidebar-sector { font-size: 9px; color: var(--cream3); margin-top: 1px; }
+
+.co-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px 44px;
+  background: var(--bg);
+}
+.co-detail-view { display: none; }
+.co-detail-view.active { display: block; }
+
+.co-eyebrow { font-family: var(--mono); font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px; }
+.co-eyebrow.t1 { color: var(--violet); }
+.co-eyebrow.t2 { color: var(--teal); }
+.co-eyebrow.featured { color: var(--violet); }
+.co-name { font-family: var(--serif); font-size: 48px; line-height: 1.0; color: var(--cream); margin-bottom: 8px; }
+.co-sector { font-family: var(--mono); font-size: 9px; color: var(--cream3); padding-bottom: 24px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+
+.co-numbers-row { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.co-num-pill {
+  font-family: var(--mono); font-size: 9px; color: var(--violet);
+  background: var(--violet-soft); border: 1px solid var(--violet-mid);
+  padding: 5px 12px; border-radius: 20px;
+}
+
+.co-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.co-grid-label { font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream3); margin-bottom: 10px; }
+.co-titles-list { list-style: none; }
+.co-titles-list li { font-size: 12.5px; color: var(--teal); padding: 3px 0; }
+.co-template-block { display: flex; align-items: center; gap: 14px; }
+.co-template-letter { font-family: var(--serif); font-size: 52px; color: var(--cream4); line-height: 1; }
+.co-template-name { font-family: var(--mono); font-size: 9px; color: var(--cream3); }
+
+.co-context-card {
+  background: var(--bg2);
+  border-top: 3px solid;
+  padding: 22px 24px;
+  border-radius: 0 0 4px 4px;
+}
+.co-context-card.t1 { border-top-color: var(--violet); }
+.co-context-card.t2 { border-top-color: var(--teal); }
+.co-context-card.featured { border-top-color: var(--violet); }
+.co-context-label { font-family: var(--mono); font-size: 7.5px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+.co-context-card.t1 .co-context-label { color: var(--violet); }
+.co-context-card.t2 .co-context-label { color: var(--teal); }
+.co-context-card.featured .co-context-label { color: var(--violet); }
+.co-context-body { font-family: var(--serif); font-size: 17px; font-weight: 300; color: var(--cream); line-height: 1.65; font-style: italic; }
+
+/* ===== SCRIPTS PANEL ===== */
+#panel-scripts { flex-direction: column; overflow: hidden; }
+
+.scripts-head {
+  flex-shrink: 0;
+  padding: 24px 32px 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.scripts-title { font-family: var(--serif); font-size: 26px; color: var(--cream); margin-bottom: 4px; }
+.scripts-sub { font-family: var(--mono); font-size: 10px; color: var(--cream3); margin-bottom: 18px; }
+.tmpl-choices { display: flex; gap: 0; }
+.tmpl-choice {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-right: 4px;
+}
+.tmpl-choice:last-child { margin-right: 0; }
+.tmpl-choice:hover { background: rgba(255,255,255,0.02); }
+.tmpl-choice.active { background: var(--violet-soft); border-color: var(--violet); }
+.tmpl-choice-letter { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--cream4); }
+.tmpl-choice.active .tmpl-choice-letter { color: var(--violet); }
+.tmpl-choice-name { font-family: var(--mono); font-size: 9px; color: var(--cream3); margin-top: 2px; }
+.tmpl-choice-for { font-family: var(--sans); font-size: 8px; color: var(--cream3); font-weight: 400; margin-top: 2px; }
+
+.scripts-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 32px 40px;
+  background: var(--bg);
+}
+
+.conn-note-strip {
+  margin-top: 20px;
+  border-left: 3px solid var(--violet);
+  background: var(--surface);
+  padding: 14px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 20px;
+}
+.conn-note-meta { flex-shrink: 0; }
+.conn-note-label { font-family: var(--mono); font-size: 7.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--violet); margin-bottom: 4px; }
+.conn-note-chars { font-family: var(--mono); font-size: 9px; color: var(--cream3); }
+.conn-note-text { flex: 1; font-size: 12.5px; color: var(--cream2); line-height: 1.7; }
+.conn-note-btn-wrap { flex-shrink: 0; display: flex; align-items: center; }
+
+.tmpl-panel { display: none; }
+.tmpl-panel.active { display: block; }
+.tmpl-block { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.tmpl-block-head { background: var(--bg3); padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; }
+.tmpl-block-title { font-family: var(--mono); font-size: 8.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream3); }
+.tmpl-block-body { padding: 20px 22px; font-size: 13px; color: var(--cream2); line-height: 1.85; white-space: pre-wrap; background: var(--bg2); }
+.tmpl-block-footer { background: var(--bg3); padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.tmpl-word-count { font-family: var(--mono); font-size: 9px; color: var(--cream3); }
+
+/* ===== REPLIES PANEL ===== */
+#panel-replies { flex-direction: column; overflow: hidden; }
+
+.replies-outer {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.replies-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 28px 32px 48px;
+}
+.reply-card {
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.reply-card + .reply-card { margin-top: 12px; }
+.reply-head { background: var(--bg3); padding: 12px 20px; }
+.reply-num { font-family: var(--mono); font-size: 8.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--violet); margin-bottom: 4px; }
+.reply-situation { font-size: 13px; font-weight: 600; color: var(--cream); }
+.reply-body { padding: 16px 20px; font-size: 13px; color: var(--cream2); line-height: 1.85; white-space: pre-wrap; background: var(--bg2); }
+.reply-footer { background: var(--bg3); padding: 10px 20px; display: flex; justify-content: flex-end; border-top: 1px solid var(--border); }
+
+/* ===== WARM UP PANEL ===== */
+#panel-warmup { overflow-y: auto; }
+.warmup-inner { padding: 28px 32px 48px; }
+.warmup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.warmup-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.warmup-card-head { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.warmup-card-title { font-family: var(--mono); font-size: 8.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream3); }
+.warmup-card-body { padding: 16px 18px; }
+
+.warmup-dot-list { list-style: none; }
+.warmup-dot-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--cream2); padding: 5px 0; line-height: 1.5; }
+.warmup-dot-list li::before { content: ''; width: 4px; height: 4px; background: var(--violet); border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+
+.kw-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--border2); }
+.kw-row:last-child { border-bottom: none; }
+.kw-text { font-family: var(--mono); font-size: 11px; color: var(--cream2); }
+
+.comment-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.comment-col { border-left: 3px solid; padding: 10px 14px; border-radius: 0 4px 4px 0; background: var(--bg3); }
+.comment-col.good { border-left-color: var(--green); }
+.comment-col.bad { border-left-color: var(--red); }
+.comment-col-label { font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+.comment-col.good .comment-col-label { color: var(--green); }
+.comment-col.bad .comment-col-label { color: var(--red); }
+.comment-col-text { font-size: 12px; color: var(--cream2); line-height: 1.6; }
+
+.ai-prompt-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; font-family: var(--mono); font-size: 11px; color: var(--cream2); line-height: 1.75; }
+
+/* COPY BUTTON */
+.copy-btn {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: var(--violet-soft);
+  color: var(--violet);
+  border: 1px solid var(--violet-mid);
+  padding: 7px 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.copy-btn:hover { background: var(--violet); color: white; border-color: var(--violet); }
+.copy-btn.copied { background: var(--green-soft); color: var(--green); border-color: rgba(74,222,128,0.25); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-brand">Ark<span>.</span></div>
+  <div class="topbar-client">
+    <div class="topbar-client-name">Rutuja Lokhande</div>
+    <div class="topbar-client-role">Urban Designer & Architect , Melbourne</div>
+  </div>
+  <div class="topbar-status">
+    <div class="pulse-dot"></div>
+    485 Visa · Full Work Rights · Available Now
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('companies', this)">
+    Companies <span class="tab-badge">16</span>
+  </div>
+  <div class="tab" onclick="switchTab('scripts', this)">
+    Scripts <span class="tab-badge">3</span>
+  </div>
+  <div class="tab" onclick="switchTab('replies', this)">
+    Replies <span class="tab-badge">3</span>
+  </div>
+  <div class="tab" onclick="switchTab('warmup', this)">
+    Warm Up <span class="tab-badge">4</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- COMPANIES PANEL -->
+  <div class="panel active" id="panel-companies">
+    <div class="co-sidebar">
+      <div class="sidebar-section-label">Priority First</div>
+      <div class="sidebar-featured" id="sb-hassell" onclick="showCompany('hassell')">
+        <div class="sidebar-featured-eyebrow">Warm Contact · Priority 1</div>
+        <div class="sidebar-featured-name">Hassell</div>
+        <div class="sidebar-featured-sub">Tier 1 Melbourne studio , research-led design aligns directly</div>
+      </div>
+
+      <div class="sidebar-section-label">Tier 1</div>
+      <div class="sidebar-item t1" id="sb-architectus" onclick="showCompany('architectus')">
+        <div class="sidebar-idx">01</div>
+        <div>
+          <div class="sidebar-name">Architectus</div>
+          <div class="sidebar-sector">Architecture & Urban Design</div>
+        </div>
+      </div>
+      <div class="sidebar-item t1" id="sb-urbis" onclick="showCompany('urbis')">
+        <div class="sidebar-idx">02</div>
+        <div>
+          <div class="sidebar-name">Urbis</div>
+          <div class="sidebar-sector">Planning & Urban Design</div>
+        </div>
+      </div>
+      <div class="sidebar-item t1" id="sb-ghd" onclick="showCompany('ghd')">
+        <div class="sidebar-idx">03</div>
+        <div>
+          <div class="sidebar-name">GHD</div>
+          <div class="sidebar-sector">Infrastructure & Design</div>
+        </div>
+      </div>
+      <div class="sidebar-item t1" id="sb-tract" onclick="showCompany('tract')">
+        <div class="sidebar-idx">04</div>
+        <div>
+          <div class="sidebar-name">Tract Consultants</div>
+          <div class="sidebar-sector">Landscape & Urban Design</div>
+        </div>
+      </div>
+      <div class="sidebar-item t1" id="sb-hansen" onclick="showCompany('hansen')">
+        <div class="sidebar-idx">05</div>
+        <div>
+          <div class="sidebar-name">Hansen Partnership</div>
+          <div class="sidebar-sector">Planning & Landscape</div>
+        </div>
+      </div>
+      <div class="sidebar-item t1" id="sb-devvic" onclick="showCompany('devvic')">
+        <div class="sidebar-idx">06</div>
+        <div>
+          <div class="sidebar-name">Development Victoria</div>
+          <div class="sidebar-sector">State Government Agency</div>
+        </div>
+      </div>
+      <div class="sidebar-item t1" id="sb-citymelb" onclick="showCompany('citymelb')">
+        <div class="sidebar-idx">07</div>
+        <div>
+          <div class="sidebar-name">City of Melbourne</div>
+          <div class="sidebar-sector">Local Government</div>
+        </div>
+      </div>
+      <div class="sidebar-item t1" id="sb-jmt" onclick="showCompany('jmt')">
+        <div class="sidebar-idx">08</div>
+        <div>
+          <div class="sidebar-name">John Wardle Architects</div>
+          <div class="sidebar-sector">Architecture & Design Research</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section-label">Tier 2</div>
+      <div class="sidebar-item t2" id="sb-planisphere" onclick="showCompany('planisphere')">
+        <div class="sidebar-idx">09</div>
+        <div>
+          <div class="sidebar-name">Planisphere</div>
+          <div class="sidebar-sector">Urban Planning & Heritage</div>
+        </div>
+      </div>
+      <div class="sidebar-item t2" id="sb-aspect" onclick="showCompany('aspect')">
+        <div class="sidebar-idx">10</div>
+        <div>
+          <div class="sidebar-name">Aspect Studios</div>
+          <div class="sidebar-sector">Landscape Architecture</div>
+        </div>
+      </div>
+      <div class="sidebar-item t2" id="sb-urban-enterprise" onclick="showCompany('urban-enterprise')">
+        <div class="sidebar-idx">11</div>
+        <div>
+          <div class="sidebar-name">Urban Enterprise</div>
+          <div class="sidebar-sector">Planning & Economics</div>
+        </div>
+      </div>
+      <div class="sidebar-item t2" id="sb-ratio" onclick="showCompany('ratio')">
+        <div class="sidebar-idx">12</div>
+        <div>
+          <div class="sidebar-name">Ratio Consultants</div>
+          <div class="sidebar-sector">Urban Planning & Design</div>
+        </div>
+      </div>
+      <div class="sidebar-item t2" id="sb-mgb" onclick="showCompany('mgb')">
+        <div class="sidebar-idx">13</div>
+        <div>
+          <div class="sidebar-name">MGB Architects</div>
+          <div class="sidebar-sector">Architecture , Residential</div>
+        </div>
+      </div>
+      <div class="sidebar-item t2" id="sb-pba" onclick="showCompany('pba')">
+        <div class="sidebar-idx">14</div>
+        <div>
+          <div class="sidebar-name">Place Design Group</div>
+          <div class="sidebar-sector">Urban Design & Planning</div>
+        </div>
+      </div>
+      <div class="sidebar-item t2" id="sb-mpa" onclick="showCompany('mpa')">
+        <div class="sidebar-idx">15</div>
+        <div>
+          <div class="sidebar-name">Metropolitan Planning Authority</div>
+          <div class="sidebar-sector">Victorian State Government</div>
+        </div>
+      </div>
+      <div class="sidebar-item t2" id="sb-terroir" onclick="showCompany('terroir')">
+        <div class="sidebar-idx">16</div>
+        <div>
+          <div class="sidebar-name">Terroir</div>
+          <div class="sidebar-sector">Architecture & Urban Research</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="co-detail" id="co-detail">
+
+      <!-- DEFAULT STATE -->
+      <div class="co-detail-view active" id="detail-default">
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:12px;opacity:0.3;">
+          <div style="font-family:var(--serif);font-size:32px;color:var(--cream);">Select a company</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--cream3);letter-spacing:2px;text-transform:uppercase;">Click any entry in the sidebar</div>
+        </div>
+      </div>
+
+      <!-- HASSELL , FEATURED -->
+      <div class="co-detail-view" id="detail-hassell">
+        <div class="co-eyebrow featured">Warm Contact · Priority First</div>
+        <div class="co-name">Hassell</div>
+        <div class="co-sector">Architecture, Urban Design & Landscape , Melbourne CBD</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">WAM 73, University of Sydney</div>
+          <div class="co-num-pill">3 projects , design to government sanction</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Urban Design Director</li>
+              <li>Graduate Urban Designer</li>
+              <li>Studio Lead</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">A</div>
+              <div class="co-template-name">Decision-Maker Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card featured">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Hassell has the most active urban design studio in Melbourne and hires graduate-level designers with research and documentation backgrounds. Your USyd Masters, research on green infrastructure, and documentation experience across three end-to-end projects is exactly the profile they recruit at graduate level. Contact the Urban Design Director or Studio Lead , not HR.</div>
+        </div>
+      </div>
+
+      <!-- ARCHITECTUS -->
+      <div class="co-detail-view" id="detail-architectus">
+        <div class="co-eyebrow t1">Tier 1</div>
+        <div class="co-name">Architectus</div>
+        <div class="co-sector">Architecture, Urban Design & Masterplanning , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">3 projects , design to sanction</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Architect</li>
+              <li>Graduate Urban Designer</li>
+              <li>Urban Design Principal</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">A</div>
+              <div class="co-template-name">Decision-Maker Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t1">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Architectus runs large-scale masterplanning and urban design commissions in Melbourne and regularly takes on USyd graduates. Your precinct-scale project work at Rydalmere and St Marys lines up with their studio output.</div>
+        </div>
+      </div>
+
+      <!-- URBIS -->
+      <div class="co-detail-view" id="detail-urbis">
+        <div class="co-eyebrow t1">Tier 1</div>
+        <div class="co-name">Urbis</div>
+        <div class="co-sector">Urban Planning & Design Consultancy , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">WAM 73, University of Sydney</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Urban Designer</li>
+              <li>Planning Consultant</li>
+              <li>Director of Urban Design</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">A</div>
+              <div class="co-template-name">Decision-Maker Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t1">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Urbis hires graduate-level planners and urban designers with strong research and strategic planning backgrounds. Your USyd WAM and urban research on biodiversity and green infrastructure is directly relevant to their advisory work.</div>
+        </div>
+      </div>
+
+      <!-- GHD -->
+      <div class="co-detail-view" id="detail-ghd">
+        <div class="co-eyebrow t1">Tier 1</div>
+        <div class="co-name">GHD</div>
+        <div class="co-sector">Infrastructure & Design Consulting , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">20% approval turnaround improvement</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Urban Designer</li>
+              <li>Graduate Design Consultant</li>
+              <li>Urban Design Lead</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">B</div>
+              <div class="co-template-name">Business Outcomes Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t1">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">GHD works across large infrastructure and environment projects where documentation accuracy and planning compliance matter. Lead with your approval turnaround number and regulatory documentation background.</div>
+        </div>
+      </div>
+
+      <!-- TRACT -->
+      <div class="co-detail-view" id="detail-tract">
+        <div class="co-eyebrow t1">Tier 1</div>
+        <div class="co-name">Tract Consultants</div>
+        <div class="co-sector">Landscape Architecture & Urban Design , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">Green infrastructure research , published</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Urban Designer</li>
+              <li>Graduate Designer</li>
+              <li>Director</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">A</div>
+              <div class="co-template-name">Decision-Maker Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t1">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Tract works across landscape and public realm projects and values designers who understand ecology and green infrastructure. Your published research on urban green spaces in compact cities is the lead for this contact.</div>
+        </div>
+      </div>
+
+      <!-- HANSEN -->
+      <div class="co-detail-view" id="detail-hansen">
+        <div class="co-eyebrow t1">Tier 1</div>
+        <div class="co-name">Hansen Partnership</div>
+        <div class="co-sector">Urban Planning & Landscape Architecture , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">WAM 73, University of Sydney</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Urban Designer</li>
+              <li>Principal Urban Designer</li>
+              <li>Associate Planner</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">A</div>
+              <div class="co-template-name">Decision-Maker Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t1">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Hansen Partnership runs integrated urban planning and landscape projects across Victoria and is known for taking on strong graduate designers. Your strategic planning and precinct-scale work from USyd fits their project types well.</div>
+        </div>
+      </div>
+
+      <!-- DEVELOPMENT VICTORIA -->
+      <div class="co-detail-view" id="detail-devvic">
+        <div class="co-eyebrow t1">Tier 1</div>
+        <div class="co-name">Development Victoria</div>
+        <div class="co-sector">State Government Development Agency , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">3 projects , design to government sanction</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Urban Designer</li>
+              <li>Place Design Officer</li>
+              <li>Urban Design Manager</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">B</div>
+              <div class="co-template-name">Business Outcomes Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t1">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Development Victoria leads precinct renewal, housing, and public realm projects across the state. They value planning compliance and documentation rigour. Your government sanction experience and DA background is the primary proof point here.</div>
+        </div>
+      </div>
+
+      <!-- CITY OF MELBOURNE -->
+      <div class="co-detail-view" id="detail-citymelb">
+        <div class="co-eyebrow t1">Tier 1</div>
+        <div class="co-name">City of Melbourne</div>
+        <div class="co-sector">Local Government , Urban Design & Planning Division</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">Green infrastructure research , published</div>
+          <div class="co-num-pill">WAM 73</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Urban Designer</li>
+              <li>Graduate Planner</li>
+              <li>Planning Manager</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">B</div>
+              <div class="co-template-name">Business Outcomes Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t1">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">The City of Melbourne's urban design and planning division actively works on green infrastructure, biodiversity, and public realm projects. Your research on urban green spaces in compact cities and your regulatory compliance background make this a strong fit.</div>
+        </div>
+      </div>
+
+      <!-- JOHN WARDLE -->
+      <div class="co-detail-view" id="detail-jmt">
+        <div class="co-eyebrow t1">Tier 1</div>
+        <div class="co-name">John Wardle Architects</div>
+        <div class="co-sector">Architecture & Design Research , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">Project under construction , designed from Stage 1</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Architect</li>
+              <li>Architectural Designer</li>
+              <li>Design Director</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">A</div>
+              <div class="co-template-name">Decision-Maker Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t1">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">John Wardle Architects is one of the most research-driven studios in Melbourne and values graduate architects who can think beyond documentation. Lead with the project under construction and your research paper , those are what get attention in a studio like this.</div>
+        </div>
+      </div>
+
+      <!-- PLANISPHERE -->
+      <div class="co-detail-view" id="detail-planisphere">
+        <div class="co-eyebrow t2">Tier 2</div>
+        <div class="co-name">Planisphere</div>
+        <div class="co-sector">Urban Planning & Heritage , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">WAM 73</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Planner</li>
+              <li>Urban Designer</li>
+              <li>Associate Planner</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">C</div>
+              <div class="co-template-name">Peer Referral Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t2">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Planisphere is a boutique planning consultancy working across heritage, housing, and mixed-use projects. Use Template C and reach people at associate or graduate level to understand what their hiring looks like before sending Template A.</div>
+        </div>
+      </div>
+
+      <!-- ASPECT STUDIOS -->
+      <div class="co-detail-view" id="detail-aspect">
+        <div class="co-eyebrow t2">Tier 2</div>
+        <div class="co-name">Aspect Studios</div>
+        <div class="co-sector">Landscape Architecture , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">Green infrastructure research , published</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Landscape Architect</li>
+              <li>Graduate Designer</li>
+              <li>Studio Lead</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">A</div>
+              <div class="co-template-name">Decision-Maker Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t2">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Aspect Studios works across large-scale landscape and public realm projects in Melbourne. Your published research on urban green spaces and your site-analysis-first design approach fits what they look for at graduate entry level.</div>
+        </div>
+      </div>
+
+      <!-- URBAN ENTERPRISE -->
+      <div class="co-detail-view" id="detail-urban-enterprise">
+        <div class="co-eyebrow t2">Tier 2</div>
+        <div class="co-name">Urban Enterprise</div>
+        <div class="co-sector">Planning & Economics , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">WAM 73</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Planner</li>
+              <li>Urban Design Analyst</li>
+              <li>Planning Consultant</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">C</div>
+              <div class="co-template-name">Peer Referral Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t2">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Urban Enterprise does strategic planning and economic research work for councils and developers. Connect with graduate-level planners first using Template C to understand fit before reaching out to directors.</div>
+        </div>
+      </div>
+
+      <!-- RATIO CONSULTANTS -->
+      <div class="co-detail-view" id="detail-ratio">
+        <div class="co-eyebrow t2">Tier 2</div>
+        <div class="co-name">Ratio Consultants</div>
+        <div class="co-sector">Urban Planning & Design , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">3 projects , design to sanction</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Urban Designer</li>
+              <li>Planning Consultant</li>
+              <li>Associate Planner</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">B</div>
+              <div class="co-template-name">Business Outcomes Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t2">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Ratio Consultants works on planning permits, urban design guidelines, and residential projects across Melbourne. Your regulatory documentation background and compliance experience is the lead for this one.</div>
+        </div>
+      </div>
+
+      <!-- MGB ARCHITECTS -->
+      <div class="co-detail-view" id="detail-mgb">
+        <div class="co-eyebrow t2">Tier 2</div>
+        <div class="co-name">MGB Architects</div>
+        <div class="co-sector">Architecture , Residential & Multi-Unit , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">Project under construction , designed from Stage 1</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Architect</li>
+              <li>Architectural Draftsperson</li>
+              <li>Director</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">B</div>
+              <div class="co-template-name">Business Outcomes Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t2">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">MGB Architects works across multi-residential and boutique residential projects in Melbourne. Lead with the project under construction and your documentation package experience across residential typologies.</div>
+        </div>
+      </div>
+
+      <!-- PLACE DESIGN GROUP -->
+      <div class="co-detail-view" id="detail-pba">
+        <div class="co-eyebrow t2">Tier 2</div>
+        <div class="co-name">Place Design Group</div>
+        <div class="co-sector">Urban Design & Planning , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">WAM 73</div>
+          <div class="co-num-pill">Green infrastructure research</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Urban Designer</li>
+              <li>Urban Planner</li>
+              <li>Design Researcher</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">A</div>
+              <div class="co-template-name">Decision-Maker Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t2">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Place Design Group works across place-making, urban design, and landscape projects. Your site-analysis-led approach and research background on green infrastructure is aligned with how they approach public realm and precinct work.</div>
+        </div>
+      </div>
+
+      <!-- MPA -->
+      <div class="co-detail-view" id="detail-mpa">
+        <div class="co-eyebrow t2">Tier 2</div>
+        <div class="co-name">Metropolitan Planning Authority</div>
+        <div class="co-sector">Victorian State Government , Planning & Urban Growth</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">WAM 73</div>
+          <div class="co-num-pill">20% approval turnaround improvement</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Planner</li>
+              <li>Urban Growth Planner</li>
+              <li>Strategic Planning Officer</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">B</div>
+              <div class="co-template-name">Business Outcomes Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t2">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">The MPA manages strategic planning for Melbourne's urban growth corridors. They hire graduate planners with strong compliance and documentation backgrounds. Lead with your regulatory approval experience and your DA submission work.</div>
+        </div>
+      </div>
+
+      <!-- TERROIR -->
+      <div class="co-detail-view" id="detail-terroir">
+        <div class="co-eyebrow t2">Tier 2</div>
+        <div class="co-name">Terroir</div>
+        <div class="co-sector">Architecture & Urban Research , Melbourne</div>
+        <div class="co-numbers-row">
+          <div class="co-num-pill">Project under construction , designed from Stage 1</div>
+        </div>
+        <div class="co-grid">
+          <div>
+            <div class="co-grid-label">Find on LinkedIn</div>
+            <ul class="co-titles-list">
+              <li>Graduate Architect</li>
+              <li>Architectural Designer</li>
+              <li>Research Lead</li>
+            </ul>
+          </div>
+          <div>
+            <div class="co-grid-label">Use Template</div>
+            <div class="co-template-block">
+              <div class="co-template-letter">C</div>
+              <div class="co-template-name">Peer Referral Outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="co-context-card t2">
+          <div class="co-context-label">Context Note</div>
+          <div class="co-context-body">Terroir is a smaller research-driven architecture studio. Use Template C to reach a graduate architect or designer first. The research paper and the project under construction are the two proof points most likely to get a reply here.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPTS PANEL -->
+  <div class="panel" id="panel-scripts">
+    <div class="scripts-head">
+      <div class="scripts-title">Approved <em>Scripts</em></div>
+      <div class="scripts-sub">One connection note. Three message templates. All in your voice.</div>
+      <div class="tmpl-choices">
+        <div class="tmpl-choice active" onclick="switchTemplate('a', this)">
+          <div class="tmpl-choice-letter">A</div>
+          <div class="tmpl-choice-name">Template A</div>
+          <div class="tmpl-choice-for">Primary decision-maker , design studios</div>
+        </div>
+        <div class="tmpl-choice" onclick="switchTemplate('b', this)">
+          <div class="tmpl-choice-letter">B</div>
+          <div class="tmpl-choice-name">Template B</div>
+          <div class="tmpl-choice-for">Infrastructure & government , outcomes focus</div>
+        </div>
+        <div class="tmpl-choice" onclick="switchTemplate('c', this)">
+          <div class="tmpl-choice-letter">C</div>
+          <div class="tmpl-choice-name">Template C</div>
+          <div class="tmpl-choice-for">Peer outreach , no job ask</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scripts-body">
+      <div class="conn-note-strip">
+        <div class="conn-note-meta">
+          <div class="conn-note-label">Connection Note</div>
+          <div class="conn-note-chars">Under 280 chars</div>
+        </div>
+        <div class="conn-note-text" id="conn-note-text">Hi [First Name], I came across your profile while researching urban design roles in Melbourne. I'm a USyd urban design graduate with architecture experience in India and published research on green infrastructure. Would love to connect if you're open to it.</div>
+        <div class="conn-note-btn-wrap">
+          <button class="copy-btn" id="btn-conn" onclick="copyEl('conn-note-text','btn-conn')">Copy</button>
+        </div>
+      </div>
+
+      <!-- TEMPLATE A -->
+      <div class="tmpl-panel active" id="tmpl-panel-a">
+        <div class="tmpl-block">
+          <div class="tmpl-block-head">
+            <div class="tmpl-block-title">Template A , Design Studio Director / Studio Lead</div>
+          </div>
+          <div class="tmpl-block-body" id="tmpl-a-body">Hi [First Name],
+
+I came across [Company]'s recent work on [specific project or initiative] and wanted to reach out directly.
+
+I'm a graduate architect and urban designer with a Master of Urban Design from the University of Sydney (WAM 73) and a year of industry experience in India, where I delivered three architecture projects from design through to government sanction. One project I designed from Stage 1 is currently under construction. I also co-authored a research paper on enhancing biodiversity in compact cities through urban green spaces, which has just been published.
+
+I'm based in Melbourne on a 485 visa with full work rights and am actively targeting graduate architect and urban designer roles.
+
+I know studios like [Company] work on exactly the kind of precinct-scale and public realm projects I studied at USyd. I'd value a brief conversation about the kind of work your team is taking on and whether there's a potential fit.
+
+Would you be open to a 15-minute call in the next couple of weeks?</div>
+          <div class="tmpl-block-footer">
+            <div class="tmpl-word-count">~130 words</div>
+            <button class="copy-btn" id="btn-ta" onclick="copyEl('tmpl-a-body','btn-ta')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEMPLATE B -->
+      <div class="tmpl-panel" id="tmpl-panel-b">
+        <div class="tmpl-block">
+          <div class="tmpl-block-head">
+            <div class="tmpl-block-title">Template B , Infrastructure, Government & Outcomes-Focused</div>
+          </div>
+          <div class="tmpl-block-body" id="tmpl-b-body">Hi [First Name],
+
+I'm reaching out because [Company]'s work on planning compliance and urban growth projects caught my attention.
+
+I'm a graduate architect with a Master of Urban Design from the University of Sydney and a background in architectural documentation across residential, university, and government project typologies in India. In my last role, I improved approval turnaround by 20% through structured documentation packages aligned to planning regulations. I've taken three projects from design through to government sanction and construction stage.
+
+I'm on a 485 visa in Melbourne with full work rights and am looking for graduate planner or urban designer roles where documentation rigour and regulatory compliance experience are valued.
+
+Would you have 15 minutes to speak about what [Company] is working on and where a graduate-level hire might fit?</div>
+          <div class="tmpl-block-footer">
+            <div class="tmpl-word-count">~125 words</div>
+            <button class="copy-btn" id="btn-tb" onclick="copyEl('tmpl-b-body','btn-tb')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEMPLATE C -->
+      <div class="tmpl-panel" id="tmpl-panel-c">
+        <div class="tmpl-block">
+          <div class="tmpl-block-head">
+            <div class="tmpl-block-title">Template C , Peer / Graduate-Level Referral</div>
+          </div>
+          <div class="tmpl-block-body" id="tmpl-c-body">Hi [First Name],
+
+I came across your profile while researching urban design practices in Melbourne and noticed you're at [Company].
+
+I'm a USyd urban design graduate and architect who's recently moved to Melbourne. I've been trying to understand how the local design market actually works for graduates coming from overseas, and I'd genuinely value your perspective on what has been useful for you in building experience here.
+
+No agenda. Just trying to learn from people who are a few steps further along.
+
+Would you be open to a 15-minute chat?</div>
+          <div class="tmpl-block-footer">
+            <div class="tmpl-word-count">~90 words</div>
+            <button class="copy-btn" id="btn-tc" onclick="copyEl('tmpl-c-body','btn-tc')">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPLIES PANEL -->
+  <div class="panel" id="panel-replies">
+    <div class="replies-outer">
+      <div class="replies-scroll">
+
+        <div class="reply-card">
+          <div class="reply-head">
+            <div class="reply-num">Scenario 01</div>
+            <div class="reply-situation">They ask for your resume or portfolio</div>
+          </div>
+          <div class="reply-body" id="reply-1-body">Thanks for coming back to me. Attaching my resume, and here's my portfolio: [Google Drive link].
+
+The project under construction in India is the one I'd point you to first, along with the Rydalmere precinct masterplan from my Masters at USyd.
+
+Happy to set up a call at whatever time suits you.</div>
+          <div class="reply-footer">
+            <button class="copy-btn" id="btn-r1" onclick="copyEl('reply-1-body','btn-r1')">Copy</button>
+          </div>
+        </div>
+
+        <div class="reply-card">
+          <div class="reply-head">
+            <div class="reply-num">Scenario 02</div>
+            <div class="reply-situation">They say not right now or nothing available</div>
+          </div>
+          <div class="reply-body" id="reply-2-body">Completely understand, thanks for letting me know. If something opens up for a graduate urban designer or architect in the next few months, I'd appreciate being kept in mind.
+
+I'll keep an eye on what [Company] is working on. Good luck with the current projects.</div>
+          <div class="reply-footer">
+            <button class="copy-btn" id="btn-r2" onclick="copyEl('reply-2-body','btn-r2')">Copy</button>
+          </div>
+        </div>
+
+        <div class="reply-card">
+          <div class="reply-head">
+            <div class="reply-num">Scenario 03</div>
+            <div class="reply-situation">Good conversation, then silence for 7+ days</div>
+          </div>
+          <div class="reply-body" id="reply-3-body">Hi [First Name], just following up on our conversation from [date].
+
+I wanted to share something that might be relevant, my research paper on urban green spaces in compact cities was recently published. Given [Company]'s work in this space, thought it might be of interest.
+
+Still very keen to explore if there's a fit. Happy to schedule a call if that's useful.</div>
+          <div class="reply-footer">
+            <button class="copy-btn" id="btn-r3" onclick="copyEl('reply-3-body','btn-r3')">Copy</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- WARM UP PANEL -->
+  <div class="panel" id="panel-warmup">
+    <div class="warmup-inner">
+      <div class="warmup-grid">
+
+        <!-- CARD 1: What to comment on -->
+        <div class="warmup-card">
+          <div class="warmup-card-head">
+            <div class="warmup-card-title">What to comment on</div>
+          </div>
+          <div class="warmup-card-body">
+            <ul class="warmup-dot-list">
+              <li>Urban designers or planners sharing a precinct project, public realm design, or active development update in Melbourne</li>
+              <li>Posts about green infrastructure, biodiversity in cities, or urban ecology (directly tied to your published research)</li>
+              <li>Studio directors or senior architects talking about what they look for in graduate designers</li>
+              <li>Posts about SEEK graduate architect or urban designer roles , comment on the skills required, not on the vacancy</li>
+              <li>University of Sydney alumni in Melbourne posting about their career transitions or local design experience</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CARD 2: Search keywords -->
+        <div class="warmup-card">
+          <div class="warmup-card-head">
+            <div class="warmup-card-title">How to find these posts</div>
+          </div>
+          <div class="warmup-card-body">
+            <div class="kw-row">
+              <span class="kw-text">urban design Melbourne</span>
+              <button class="copy-btn" onclick="copyKw(this, 'urban design Melbourne')">Copy</button>
+            </div>
+            <div class="kw-row">
+              <span class="kw-text">graduate architect Melbourne 2025</span>
+              <button class="copy-btn" onclick="copyKw(this, 'graduate architect Melbourne 2025')">Copy</button>
+            </div>
+            <div class="kw-row">
+              <span class="kw-text">green infrastructure urban planning</span>
+              <button class="copy-btn" onclick="copyKw(this, 'green infrastructure urban planning')">Copy</button>
+            </div>
+            <div class="kw-row">
+              <span class="kw-text">precinct masterplanning Victoria</span>
+              <button class="copy-btn" onclick="copyKw(this, 'precinct masterplanning Victoria')">Copy</button>
+            </div>
+            <div class="kw-row">
+              <span class="kw-text">University of Sydney urbanism alumni</span>
+              <button class="copy-btn" onclick="copyKw(this, 'University of Sydney urbanism alumni')">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3: Good vs bad comment -->
+        <div class="warmup-card">
+          <div class="warmup-card-head">
+            <div class="warmup-card-title">Good vs bad comment</div>
+          </div>
+          <div class="warmup-card-body">
+            <div class="comment-compare">
+              <div class="comment-col bad">
+                <div class="comment-col-label">Avoid</div>
+                <div class="comment-col-text">Great project! Love the approach to green infrastructure. Really inspiring work.</div>
+              </div>
+              <div class="comment-col good">
+                <div class="comment-col-label">Use this</div>
+                <div class="comment-col-text">The point about treating street trees as infrastructure rather than additions is exactly what my research on compact city biodiversity found. Melbourne's 2026 urban design awards reflected the same shift. Curious how you approached the consultation side of this one.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4: AI prompt -->
+        <div class="warmup-card">
+          <div class="warmup-card-head">
+            <div class="warmup-card-title">Personalised AI prompt</div>
+            <button class="copy-btn" id="btn-ai" onclick="copyEl('ai-prompt-text','btn-ai')">Copy</button>
+          </div>
+          <div class="warmup-card-body">
+            <div class="ai-prompt-block" id="ai-prompt-text">You are helping Rutuja Lokhande, a graduate architect and urban designer based in Melbourne, write a LinkedIn comment on a post about urban design, green infrastructure, or architecture in Melbourne or Australia.
+
+Rutuja has a Master of Urban Design from the University of Sydney (WAM 73), architecture industry experience in India where one of her designs is currently under construction, and a published research paper on enhancing biodiversity in compact cities through urban green spaces.
+
+Her voice is direct and site-grounded. She does not use filler praise. She starts with a specific observation or question, references something concrete from her own experience or research when genuinely relevant, and ends with a question that invites a real response.
+
+Here is the post she wants to comment on:
+[paste the post text here]
+
+Write a comment under 60 words. No emojis. No "Great post." No hollow affirmations. Sound like a person who has actually worked on this type of problem.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function switchTab(tab, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+function showCompany(slug) {
+  document.querySelectorAll('.co-detail-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item, .sidebar-featured').forEach(i => i.classList.remove('active'));
+  document.getElementById('detail-' + slug).classList.add('active');
+  document.getElementById('sb-' + slug).classList.add('active');
+  document.getElementById('co-detail').scrollTop = 0;
+}
+
+function switchTemplate(id, el) {
+  document.querySelectorAll('.tmpl-choice').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tmpl-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tmpl-panel-' + id).classList.add('active');
+}
+
+function copyEl(bodyId, btnId) {
+  const text = document.getElementById(bodyId).textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById(btnId);
+    const orig = btn.textContent;
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyKw(el, text) {
+  navigator.clipboard.writeText(text);
+  const orig = el.textContent;
+  el.textContent = 'Done';
+  setTimeout(() => { el.textContent = orig; }, 1500);
+}
+</script>
+</body>
+</html>
